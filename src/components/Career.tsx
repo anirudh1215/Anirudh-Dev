@@ -1,4 +1,5 @@
 import "./styles/Career.css";
+import { MdArrowOutward } from "react-icons/md";
 
 const Career = () => {
   return (
@@ -16,7 +17,19 @@ const Career = () => {
             <div className="career-info-in">
               <div className="career-role">
                 <h4>Software Engineering Intern</h4>
-                <h5>Wealth Wave Capital Group</h5>
+                <h5>
+                  <a
+                    className="career-link"
+                    href="https://www.wealthwavecapital.co.in/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-cursor="disable"
+                    aria-label="Visit Wealth Wave Capital Group website"
+                  >
+                    Wealth Wave Capital Group
+                    <MdArrowOutward />
+                  </a>
+                </h5>
               </div>
               <h3>2025</h3>
             </div>
@@ -30,7 +43,19 @@ const Career = () => {
             <div className="career-info-in">
               <div className="career-role">
                 <h4>Web Development Intern</h4>
-                <h5>Femme Rootz (NGO)</h5>
+                <h5>
+                  <a
+                    className="career-link"
+                    href="https://www.femmerootz.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-cursor="disable"
+                    aria-label="Visit Femme Rootz website"
+                  >
+                    Femme Rootz (NGO)
+                    <MdArrowOutward />
+                  </a>
+                </h5>
               </div>
               <h3>2026</h3>
             </div>
@@ -44,7 +69,19 @@ const Career = () => {
             <div className="career-info-in">
               <div className="career-role">
                 <h4>Software Developer</h4>
-                <h5>MuShark</h5>
+                <h5>
+                  <a
+                    className="career-link"
+                    href="https://mushark.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-cursor="disable"
+                    aria-label="Visit MuShark website"
+                  >
+                    MuShark
+                    <MdArrowOutward />
+                  </a>
+                </h5>
               </div>
               <h3>NOW</h3>
             </div>

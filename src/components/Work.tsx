@@ -8,35 +8,36 @@ gsap.registerPlugin(useGSAP);
 
 const Work = () => {
   useGSAP(() => {
-  let translateX: number = 0;
-
-  function setTranslateX() {
+  // Recalculated on every ScrollTrigger refresh (resize, lazy-loaded
+  // sections, font/image load) so the pin duration always matches the
+  // actual horizontal scroll width and the next section can't overlap.
+  function getTranslateX(): number {
     const box = document.getElementsByClassName("work-box");
+    if (!box.length) return 0;
     const rectLeft = document
       .querySelector(".work-container")!
       .getBoundingClientRect().left;
     const rect = box[0].getBoundingClientRect();
     const parentWidth = box[0].parentElement!.getBoundingClientRect().width;
-    let padding: number =
+    const padding: number =
       parseInt(window.getComputedStyle(box[0]).padding) / 2;
-    translateX = rect.width * box.length - (rectLeft + parentWidth) + padding;
+    return rect.width * box.length - (rectLeft + parentWidth) + padding;
   }
-
-  setTranslateX();
 
   let timeline = gsap.timeline({
     scrollTrigger: {
       trigger: ".work-section",
       start: "top top",
-      end: `+=${translateX}`, // Use actual scroll width
+      end: () => `+=${getTranslateX()}`, // Use actual scroll width
       scrub: true,
       pin: true,
+      invalidateOnRefresh: true,
       id: "work",
     },
   });
 
   timeline.to(".work-flex", {
-    x: -translateX,
+    x: () => -getTranslateX(),
     ease: "none",
   });
 
@@ -58,6 +59,21 @@ const Work = () => {
               <div className="work-title">
                 <h3>01</h3>
                 <div>
+                  <h4>Movement Based Fitness</h4>
+                  <p>Online Fitness Coaching Website</p>
+                </div>
+              </div>
+              <h4>Tools and features</h4>
+              <p>Nuxt 4, Vue, Google Sheets API, Lead-Capture Forms, SSR + SEO, WhatsApp/Call Integration</p>
+            </div>
+            <WorkImage image="/images/placeholder.webp" alt="Movement Based Fitness Coaching Website" />
+          </div>
+
+          <div className="work-box">
+            <div className="work-info">
+              <div className="work-title">
+                <h3>02</h3>
+                <div>
                   <h4>Akasaki</h4>
                   <p>GST Invoicing & Inventory Web App</p>
                 </div>
@@ -71,7 +87,7 @@ const Work = () => {
           <div className="work-box">
             <div className="work-info">
               <div className="work-title">
-                <h3>02</h3>
+                <h3>03</h3>
                 <div>
                   <h4>Plant Leaf Disease</h4>
                   <p>CNN Image Classifier</p>
@@ -86,7 +102,7 @@ const Work = () => {
           <div className="work-box">
             <div className="work-info">
               <div className="work-title">
-                <h3>03</h3>
+                <h3>04</h3>
                 <div>
                   <h4>GrowSphere</h4>
                   <p>IoT Monitoring App</p>
