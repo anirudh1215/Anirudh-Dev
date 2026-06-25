@@ -60,13 +60,6 @@ const Navbar = () => {
         <a href="/#" className="navbar-title" data-cursor="disable">
           ANIRUDH.
         </a>
-        <a
-          href="mailto:asaxena2_be23@thapar.edu"
-          className="navbar-connect"
-          data-cursor="disable"
-        >
-          asaxena2_be23@thapar.edu
-        </a>
         <ul>
           <li>
             <a data-href="#about" href="#about">
