@@ -6,9 +6,13 @@ import {
 } from "react-icons/fa6";
 import "./styles/SocialIcons.css";
 import { TbNotes } from "react-icons/tb";
+import { useState } from "react";
 import HoverLinks from "./HoverLinks";
+import ResumeModal from "./ResumeModal";
 
 const SocialIcons = () => {
+  const [resumeOpen, setResumeOpen] = useState(false);
+
   return (
     <div className="icons-section">
       <div className="social-icons" id="social">
@@ -33,12 +37,18 @@ const SocialIcons = () => {
           </a>
         </span>
       </div>
-      <a className="resume-button" href="/Anirudh_Saxena_Resume.pdf" target="_blank" rel="noopener noreferrer">
+      <button
+        type="button"
+        className="resume-button"
+        onClick={() => setResumeOpen(true)}
+      >
         <HoverLinks text="RESUME" />
         <span>
           <TbNotes />
         </span>
-      </a>
+      </button>
+
+      <ResumeModal open={resumeOpen} onClose={() => setResumeOpen(false)} />
     </div>
   );
 };
