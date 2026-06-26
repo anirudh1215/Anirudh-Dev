@@ -34,7 +34,7 @@
 }
 .what-box-in {
   flex-direction: column;
-  height: 500px;
+  height: 560px;
   margin-left: 200px;
   position: relative;
   display: none;
@@ -63,6 +63,7 @@
   padding: 10px 50px;
 }
 .what-content h3 {
+  font-family: "Clash Display", "Geist", sans-serif;
   font-size: 35px;
   letter-spacing: 1px;
   margin: 0;
@@ -199,7 +200,7 @@
   animation: whatBorders 1.2s 1 forwards;
 }
 .what-border2 svg {
-  height: 500px;
+  height: 560px;
   top: 50%;
   transform: translateY(-50%);
   position: absolute;
@@ -249,7 +250,10 @@
     margin-right: 20%;
   }
   .what-box-in {
-    height: 400px;
+    height: 460px;
+  }
+  .what-border2 svg {
+    height: 460px;
   }
   .what-content h3 {
     font-size: 28px;
@@ -290,8 +294,11 @@
     padding-bottom: 50px;
   }
   .what-box-in {
-    height: 500px;
+    height: 560px;
     margin-left: -50px;
+  }
+  .what-border2 svg {
+    height: 560px;
   }
   .what-content {
     padding: 50px;
