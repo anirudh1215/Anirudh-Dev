@@ -37,19 +37,7 @@ const Cursor = () => {
       const rect = element.getBoundingClientRect();
       const type = element.dataset.cursor;
 
-      if (type === "icons") {
-        cursor.classList.add("cursor-icons");
-        // overwrite kills the follow-loop's in-flight tween so the cursor
-        // snaps to the target instead of settling between the two.
-        gsap.to(cursor, {
-          x: rect.left,
-          y: rect.top,
-          duration: 0.1,
-          overwrite: true,
-        });
-        cursor.style.setProperty("--cursorH", `${rect.height}px`);
-        hover = true;
-      } else if (type === "fit") {
+      if (type === "fit") {
         // Morph the cursor into a ring that hugs the element's shape and
         // sits centered over it, highlighting it.
         cursor.classList.add("cursor-fit");
@@ -77,7 +65,7 @@ const Cursor = () => {
       // Ignore moves between the element and its own descendants.
       const related = e.relatedTarget as Node | null;
       if (related && element.contains(related)) return;
-      cursor.classList.remove("cursor-disable", "cursor-icons", "cursor-fit");
+      cursor.classList.remove("cursor-disable", "cursor-fit");
       hover = false;
     };
 
