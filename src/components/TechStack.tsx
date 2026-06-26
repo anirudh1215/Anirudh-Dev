@@ -185,6 +185,7 @@ const TechStack = () => {
 
       <Canvas
         shadows
+        dpr={[1, 2]}
         gl={{ alpha: true, stencil: false, depth: false, antialias: false }}
         camera={{ position: [0, 0, 20], fov: 32.5, near: 1, far: 100 }}
         onCreated={(state) => {
