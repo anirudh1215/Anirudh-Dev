@@ -52,7 +52,12 @@
     justify-content: right;
     max-width: 1920px;
     height: var(--vh);
-    padding: 0px;
+    /* Offset the content down by ~the fixed header's height so it is
+       optically centered in the visible area below the header instead of
+       behind it. Without this the top gap hides under the fixed navbar and
+       the equal bottom gap reads as wasted/over-scrolled space. */
+    padding: 140px 0px 0px;
+    box-sizing: border-box;
     opacity: 1;
   }
   .about-me {
