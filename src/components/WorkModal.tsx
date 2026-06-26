@@ -43,7 +43,7 @@ const WorkModal = ({ project, onClose }: Props) => {
         </button>
 
         <div className="work-modal-image">
-          <img src={project.image} alt={project.alt} />
+          <img src={project.image} alt={project.alt} decoding="async" />
         </div>
 
         <div className="work-modal-body">

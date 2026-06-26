@@ -27,7 +27,7 @@ const WorkImage = (props: Props) => {
       <div className="work-link">
         <MdArrowOutward />
       </div>
-      <img src={props.image} alt={props.alt} />
+      <img src={props.image} alt={props.alt} loading="lazy" decoding="async" />
       {isVideo && <video src={video} autoPlay muted playsInline loop></video>}
     </>
   );
