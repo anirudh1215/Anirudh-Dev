@@ -54,12 +54,26 @@ const Navbar = () => {
       clickHandlers.forEach(([el, h]) => el.removeEventListener("click", h));
     };
   }, []);
+
+  const scrollToTop = () => {
+    if (window.innerWidth > 1024) {
+      smoother.scrollTo(0, true);
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   return (
     <>
       <div className="header">
-        <a href="/#" className="navbar-title" data-cursor="disable">
-          ANIRUDH.
-        </a>
+        <button
+          type="button"
+          onClick={scrollToTop}
+          className="navbar-title"
+          data-cursor="disable"
+        >
+          <HoverLinks text="ANIRUDH." />
+        </button>
         <ul>
           <li>
             <a data-href="#about" href="#about">

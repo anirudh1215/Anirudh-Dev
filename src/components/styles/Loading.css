@@ -194,6 +194,12 @@
   color: var(--backgroundColor);
 }
 .loader-title {
+  font-family: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
   font-weight: 700;
   font-size: 14px;
   letter-spacing: 0.2px;
