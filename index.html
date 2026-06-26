@@ -5,6 +5,10 @@
     <!-- <link rel="icon" type="image/svg+xml" href="/" /> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Anirudh Saxena - Full-Stack Engineer | Web Developer</title>
+    <!-- The hero is gated on the 3D model + its Draco decoder; start fetching
+         them in parallel with the JS bundle instead of after it parses. -->
+    <link rel="preload" href="/models/character.enc" as="fetch" />
+    <link rel="preload" href="/draco/draco_decoder.wasm" as="fetch" />
   </head>
   <body>
     <div id="root"></div>
