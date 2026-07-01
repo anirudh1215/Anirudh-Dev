@@ -130,6 +130,11 @@ function Pointer({ vec = new THREE.Vector3(), isActive }: PointerProps) {
 
 const TechStack = () => {
   const [isActive, setIsActive] = useState(false);
+  // Whether the section is on (or near) the screen. When it isn't, we flip the
+  // r3f render loop off entirely so the physics sim + N8AO/shadow/HDR passes
+  // stop burning the GPU while the user is reading other sections.
+  const [inView, setInView] = useState(true);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   // This section is lazy-loaded and adds a tall 3D canvas after the rest of
   // the page (incl. the pinned Work section) has already measured its layout.
@@ -138,6 +143,20 @@ const TechStack = () => {
   useEffect(() => {
     const id = requestAnimationFrame(() => ScrollTrigger.refresh());
     return () => cancelAnimationFrame(id);
+  }, []);
+
+  // Only run the WebGL loop while the section is within ~one viewport of the
+  // screen. Everywhere else it renders "never", so scrolling through the rest
+  // of the page stays smooth even on a weaker (60 Hz) GPU.
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => setInView(entries[0].isIntersecting),
+      { rootMargin: "300px 0px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
   }, []);
 
   useEffect(() => {
@@ -180,12 +199,13 @@ const TechStack = () => {
   }, []);
 
   return (
-    <div className="techstack">
+    <div className="techstack" ref={containerRef}>
       <h2> My Techstack</h2>
 
       <Canvas
         shadows
-        dpr={[1, 2]}
+        frameloop={inView ? "always" : "never"}
+        dpr={[1, 1.5]}
         gl={{ alpha: true, stencil: false, depth: false, antialias: false }}
         camera={{ position: [0, 0, 20], fov: 32.5, near: 1, far: 100 }}
         onCreated={(state) => {

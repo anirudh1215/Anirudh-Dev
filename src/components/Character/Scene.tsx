@@ -108,8 +108,23 @@ const Scene = () => {
         landingDiv.addEventListener("touchstart", onTouchStart);
         landingDiv.addEventListener("touchend", onTouchEnd);
       }
+      // The character model scrolls up and off-screen after the "What I Do"
+      // section, but this raw-three.js loop kept rendering the full scene the
+      // whole way down the page. Gate the expensive work on visibility so the
+      // GPU is idle once the model is no longer on screen.
+      let isVisible = true;
+      const visibilityObserver = new IntersectionObserver(
+        (entries) => (isVisible = entries[0].isIntersecting),
+        { rootMargin: "100px 0px" }
+      );
+      visibilityObserver.observe(canvasDiv.current);
+
       const animate = () => {
         requestAnimationFrame(animate);
+        // Keep the clock drained every frame so it never returns a huge delta
+        // (and animation jump) the moment the model scrolls back into view.
+        const delta = clock.getDelta();
+        if (!isVisible) return;
         if (headBone) {
           handleHeadRotation(
             headBone,
@@ -121,7 +136,6 @@ const Scene = () => {
           );
           light.setPointLight(screenLight);
         }
-        const delta = clock.getDelta();
         if (mixer) {
           mixer.update(delta);
         }
@@ -130,6 +144,7 @@ const Scene = () => {
       animate();
       return () => {
         clearTimeout(debounce);
+        visibilityObserver.disconnect();
         scene.clear();
         renderer.dispose();
         window.removeEventListener("resize", () =>

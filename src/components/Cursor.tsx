@@ -22,7 +22,9 @@ const Cursor = () => {
         const delay = 6;
         cursorPos.x += (mousePos.x - cursorPos.x) / delay;
         cursorPos.y += (mousePos.y - cursorPos.y) / delay;
-        gsap.to(cursor, { x: cursorPos.x, y: cursorPos.y, duration: 0.1 });
+        // The loop already smooths the position via the lerp above, so apply it
+        // directly with gsap.set instead of spawning a fresh tween every frame.
+        gsap.set(cursor, { x: cursorPos.x, y: cursorPos.y });
       }
       raf = requestAnimationFrame(loop);
     });
